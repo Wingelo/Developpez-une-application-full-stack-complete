@@ -7,6 +7,8 @@ import com.openclassrooms.mddapi.repository.UserCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class UserCommentService implements UserCommentServiceImpl {
@@ -18,6 +20,7 @@ public class UserCommentService implements UserCommentServiceImpl {
         comment.setUser(user);
         comment.setArticle(article);
         comment.setContent(commentUser);
+        comment.setCreatedAt(LocalDateTime.now());
         userCommentRepository.save(comment);
     }
 }

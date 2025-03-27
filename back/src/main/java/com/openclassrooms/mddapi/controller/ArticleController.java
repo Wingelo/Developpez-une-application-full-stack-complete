@@ -47,7 +47,7 @@ public class ArticleController {
             description = "Permet de récupérer un seul article, exemple : article/1"
 
     )
-    @GetMapping("/article/{id}")
+    @GetMapping("/articles/{id}")
     public ResponseEntity<?> getArticleInfo(@PathVariable int id) {
         Article article = articleService.getArticleById(id);
         if (article == null) {
@@ -64,7 +64,7 @@ public class ArticleController {
             summary = "Ajoute un nouvel article",
             description = "Permet de ajouter un article pour l'utilisateur du compte"
     )
-    @PostMapping(value = "/article/add")
+    @PostMapping(value = "/articles")
     public ResponseEntity<?> addArticle(
             @RequestParam("themeId") Integer themeId,
             @RequestParam("title") String title,

@@ -30,7 +30,7 @@ public class ThemeController {
             summary = "Récupérer tout les thèmes",
             description = "Permet de récuperer tout les thèmes de l'application"
     )
-    @GetMapping("/theme")
+    @GetMapping("/themes")
     public ResponseEntity<?> getAllRentalsInfos() {
         List<ThemeDTO> rentalsDTOS = themeService.getAllTheme();
         if (rentalsDTOS.isEmpty()) {
@@ -45,7 +45,7 @@ public class ThemeController {
             summary = "S'abonner à un thème",
             description = "Permet de ajouter un thème pour l'utilisateur du compte"
     )
-    @PostMapping(value = "/theme/{themeId}")
+    @PostMapping(value = "/themes/subscription/{themeId}")
     public ResponseEntity<?> addSubscriptionTheme(
             @PathVariable Integer themeId) {
         // Récupérez l'utilisateur correspondant à l'email ou pseudo
@@ -67,7 +67,7 @@ public class ThemeController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Theme added");
     }
 
-    @DeleteMapping(value = "/theme/{themeId}")
+    @DeleteMapping(value = "/themes/subscription/{themeId}")
     public ResponseEntity<?> removeSubscriptionTheme(@PathVariable Integer themeId) {
         User user = toolsUtils.getUserLogin(JwtUtils.getAuthenticatedUsername());
         if (user == null) {

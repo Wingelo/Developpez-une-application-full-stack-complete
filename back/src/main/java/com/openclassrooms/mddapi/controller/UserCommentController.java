@@ -43,7 +43,7 @@ public class UserCommentController {
                     )
             )
     )
-    @PostMapping(value = "/comment")
+    @PostMapping(value = "/articles/comment")
     public ResponseEntity<?> addComment(
             @RequestParam("articleId") Integer articleId,
             @RequestParam("content") String content
