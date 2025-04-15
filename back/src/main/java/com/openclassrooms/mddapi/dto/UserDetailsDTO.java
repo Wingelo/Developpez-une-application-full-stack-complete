@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -18,22 +18,18 @@ public class UserDetailsDTO {
     private String username;
     private String email;
 
-    private String createdAt;
-    private String updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
 
     public static UserDetailsDTO fromEntity(User user) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return new UserDetailsDTO(
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
-                Optional.ofNullable(user.getCreatedAt())
-                        .map(date -> date.format(formatter))
-                        .orElse(null),
-                Optional.ofNullable(user.getUpdatedAt())
-                        .map(date -> date.format(formatter))
-                        .orElse(null)
+                user.getCreatedAt(),
+                user.getUpdatedAt()
         );
     }
 

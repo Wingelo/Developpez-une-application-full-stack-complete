@@ -1,1 +1,50 @@
-<router-outlet></router-outlet>
+<div class="app">
+
+
+  <p-menubar *ngIf="!isHome && (!isLoginPage || !isMobile)" class="navbar-mdd">
+    <!-- Logo à gauche -->
+    <ng-template pTemplate="start">
+      <img alt="MDD Logo" class="logo" src="assets/logo_p6.png"/>
+    </ng-template>
+
+    <ng-template pTemplate="end">
+      <ng-container *ngIf="isLogged$ | async; else guest">
+        <!-- Menu desktop -->
+        <div class="menu-items hidden md:flex">
+          <a class="menu-link" routerLink="/articles">Articles</a>
+          <a class="menu-link" routerLink="/themes">Thèmes</a>
+          <a (click)="logout()" class="menu-link logout">Se déconnecter</a>
+          <a class="menu-link icon" routerLink="/me">
+            <i class="pi pi-user"></i>
+          </a>
+        </div>
+
+        <!-- Hamburger (mobile only) -->
+        <button
+          (click)="sidebarVisible = true"
+          class="p-button p-button-text p-button-plain md:hidden"
+          icon="pi pi-bars"
+          pButton
+        ></button>
+      </ng-container>
+      <ng-template #guest></ng-template>
+    </ng-template>
+  </p-menubar>
+
+  <!-- Sidebar mobile -->
+  <p-sidebar *ngIf="isLogged$ | async" [(visible)]="sidebarVisible" class="mobile-sidebar md:hidden" position="right">
+    <div class="sidebar-content">
+      <a (click)="sidebarVisible = false" class="sidebar-link" routerLink="/articles">Articles</a>
+      <a (click)="sidebarVisible = false" class="sidebar-link" routerLink="/themes">Thèmes</a>
+      <a (click)="logout()" class="sidebar-link logout">Se déconnecter</a>
+
+      <div class="profile-bottom">
+        <a (click)="sidebarVisible = false" class="profile-icon" routerLink="/me">
+          <i class="pi pi-user"></i>
+        </a>
+      </div>
+    </div>
+  </p-sidebar>
+
+  <router-outlet></router-outlet>
+</div>

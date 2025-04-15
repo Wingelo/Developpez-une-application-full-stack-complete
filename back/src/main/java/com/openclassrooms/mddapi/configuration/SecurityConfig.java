@@ -47,7 +47,8 @@ public class SecurityConfig {
                             CorsConfiguration config = new CorsConfiguration();
                             config.setAllowedOrigins(List.of("http://localhost:4200"));
                             config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-                            config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+                            config.setAllowedHeaders(List.of("*")); // autorise tous les headers envoyés
+                            config.setExposedHeaders(List.of("Authorization"));
                             config.setAllowCredentials(true);
                             return config;
                         }

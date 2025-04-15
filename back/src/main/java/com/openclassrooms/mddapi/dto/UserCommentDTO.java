@@ -6,8 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -16,8 +16,9 @@ public class UserCommentDTO {
 
     private Integer id;
     private String content;
-    private String createdAt;
-    private String updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private String author;
 
     @JsonProperty("user_id")
     private Integer userId;
@@ -26,16 +27,13 @@ public class UserCommentDTO {
     private Integer articleId;
 
     public static UserCommentDTO fromEntity(Comment comment) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return new UserCommentDTO(
                 comment.getId(),
                 comment.getContent(),
-                Optional.ofNullable(comment.getCreatedAt())
-                        .map(date -> date.format(formatter))
-                        .orElse(null),
-                Optional.ofNullable(comment.getUpdatedAt())
-                        .map(date -> date.format(formatter))
-                        .orElse(null),
+                comment.getCreatedAt(),
+                comment.getUpdatedAt(),
+                comment.getUser().getUsername(),
                 comment.getUser().getId(),
                 comment.getArticle().getId()
 

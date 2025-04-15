@@ -83,7 +83,7 @@ public class ArticleController {
 
         articleService.addArticle(title, content, theme, user);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("Article created !");
+        return ResponseEntity.ok().build();
     }
 
 }

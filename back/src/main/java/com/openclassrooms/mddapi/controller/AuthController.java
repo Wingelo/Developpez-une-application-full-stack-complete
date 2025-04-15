@@ -4,6 +4,7 @@ import com.openclassrooms.mddapi.configuration.JwtUtils;
 import com.openclassrooms.mddapi.configuration.ToolsUtils;
 import com.openclassrooms.mddapi.dto.ThemeDTO;
 import com.openclassrooms.mddapi.entity.User;
+import com.openclassrooms.mddapi.request.LoginRequest;
 import com.openclassrooms.mddapi.service.AuthService;
 import com.openclassrooms.mddapi.service.ThemeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,10 +61,9 @@ public class AuthController {
             description = "Permet à un utilisateur de se connecter en utilisant son email et son mot de passe."
     )
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam("emailPseudo") String emailPseudo,
-                                   @RequestParam("password") String password) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
-            Map<String, Object> authData = authService.login(emailPseudo, password);
+            Map<String, Object> authData = authService.login(loginRequest.getEmailPseudo(), loginRequest.getPassword());
             return ResponseEntity.ok(authData);
         } catch (AuthenticationException e) {
             log.error(e.getMessage());
@@ -100,23 +99,15 @@ public class AuthController {
             @RequestParam(required = false) String email,
             @RequestParam(required = false) String password) {
 
-        String newToken = "";
         User user = toolsUtils.getUserLogin(JwtUtils.getAuthenticatedUsername());
-        if (user != null) {
-            try {
-                newToken = authService.updateUserInfo(username, email, password, user);
-            } catch (IllegalArgumentException e) {
-                return ResponseEntity.badRequest().body(e.getMessage());
-            }
-        } else {
-            ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
         }
-
-        // Retourner le token et un message de succès
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", "User updated successfully");
-        response.put("token", newToken);
-
-        return ResponseEntity.ok(response);
+        try {
+            authService.updateUserInfo(username, email, password, user);
+            return ResponseEntity.ok().build();
+        } catch (AuthenticationException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

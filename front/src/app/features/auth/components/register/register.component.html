@@ -1,0 +1,35 @@
+<button (click)="router.navigate(['/'])" class="back-btn" icon="pi pi-arrow-left" pButton></button>
+
+<div class="register-wrapper">
+  <div class="mobile-logo md:hidden">
+    <img alt="MDD Logo" class="logo" src="assets/logo_p6.png"/>
+  </div>
+  <h2>Inscription</h2>
+
+  <form (ngSubmit)="submit()" [formGroup]="form" class="register-form">
+    <div class="p-field">
+      <label for="username">Nom d'utilisateur</label>
+      <input formControlName="username" id="username" pInputText type="text"/>
+    </div>
+
+    <div class="p-field">
+      <label for="email">Adresse e-mail</label>
+      <input formControlName="email" id="email" pInputText type="email"/>
+    </div>
+
+    <div class="p-field">
+      <label for="password">Mot de passe</label>
+      <p-password
+        [feedback]="false"
+        [inputStyle]="{'width':'100%'}"
+        [style]="{'width':'100%'}"
+        [toggleMask]="true"
+        class="full-width"
+        formControlName="password"
+        id="password"
+      ></p-password>
+    </div>
+
+    <button [disabled]="form.invalid" class="submit-btn" label="S’inscrire" pButton type="submit"></button>
+  </form>
+</div>

@@ -1,0 +1,86 @@
+.logo {
+  height: 40px;
+}
+
+.menu-items {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menu-link {
+  text-decoration: none;
+  font-weight: 500;
+  color: #000;
+}
+
+.menu-link:hover {
+  color: #673ab7;
+}
+
+.logout {
+  color: #a30f0f;
+  font-weight: bold;
+}
+
+
+/* Sidebar Mobile */
+.mobile-sidebar {
+  width: 80vw;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+}
+
+.sidebar-link {
+  padding: 1rem 0;
+  font-size: 1rem;
+  text-decoration: none;
+  color: #000;
+  border-bottom: 1px solid #eee;
+}
+
+.sidebar-link.logout {
+  color: #a30f0f;
+}
+
+.profile-icon {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #e0e0e0; /* gris clair */
+  border-radius: 50%;
+  border: 2px solid #7e5bef; /* violet */
+  font-size: 1.5rem;
+  color: #7e5bef;
+
+  .pi {
+    font-size: 1rem;
+  }
+
+}
+
+.profile-bottom {
+  margin-top: auto;
+  text-align: center;
+  padding-top: 1rem;
+
+  a {
+    font-size: 1rem;
+    color: #7e5bef;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+}
+
+

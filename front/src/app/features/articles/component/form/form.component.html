@@ -1,0 +1,49 @@
+<div class="back-button">
+  <button (click)="back()" class="p-button p-button-text p-button-plain">
+    <i class="pi pi-arrow-left back-icon"></i>
+  </button>
+</div>
+<div class="article-wrapper">
+  <h2 class="text-center">Créer un nouvel article</h2>
+  <form (ngSubmit)="submit()" [formGroup]="articleForm" class="form-block">
+    <div class="p-fluid">
+      <div class="field">
+        <p-dropdown
+          [options]="themes"
+          formControlName="themeId"
+          id="themeId"
+          optionLabel="name"
+          optionValue="id"
+          placeholder="Sélectionner un thème"
+        ></p-dropdown>
+        <small *ngIf="articleForm.get('themeId')?.invalid && articleForm.get('themeId')?.touched" class="p-error">
+          Un thème est requis.
+        </small>
+      </div>
+      <div class="field article-input">
+        <input formControlName="title" id="title" pInputText placeholder="Titre de l'article"/>
+        <small *ngIf="articleForm.get('title')?.invalid && articleForm.get('title')?.touched" class="p-error">
+          Le titre est requis (min 5 caractères)
+        </small>
+      </div>
+      <div class="field article-input">
+        <textarea
+          formControlName="content"
+          id="content"
+          pInputTextarea
+          placeholder="Contenu de l'article"
+          rows="6"
+        ></textarea>
+        <small *ngIf="articleForm.get('content')?.invalid && articleForm.get('content')?.touched" class="p-error">
+          Le contenu est requis (min 50 caractères)
+        </small>
+      </div>
+
+      <div class="form-field button-container">
+        <button [disabled]="articleForm.invalid" class="submit-btn "
+                label="Créer"
+                pButton type="submit"></button>
+      </div>
+    </div>
+  </form>
+</div>

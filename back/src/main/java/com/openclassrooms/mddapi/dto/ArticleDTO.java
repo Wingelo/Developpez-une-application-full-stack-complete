@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Data
@@ -21,32 +21,27 @@ public class ArticleDTO {
     private String title;
     private String content;
 
-    private String createdAt;
-    private String updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     // THEME
-    private String theme;
+    private ThemeDTO theme;
 
     // USER
-    private String author;
-
+    private UserDetailsDTO user;
     // Comment
     private List<UserCommentDTO> comments;
 
     public static ArticleDTO fromEntity(Article article) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return new ArticleDTO(
                 article.getId(),
                 article.getTitle(),
                 article.getContent(),
-                Optional.ofNullable(article.getCreatedAt())
-                        .map(date -> date.format(formatter))
-                        .orElse(null),
-                Optional.ofNullable(article.getUpdatedAt())
-                        .map(date -> date.format(formatter))
-                        .orElse(null),
-                article.getTheme().getName(),
-                article.getUser().getUsername(),
+                article.getCreatedAt(),
+                article.getUpdatedAt(),
+                ThemeDTO.fromEntity(article.getTheme()),
+                UserDetailsDTO.fromEntity(article.getUser()),
                 article.getComments() != null
                         ? article.getComments().stream().map(UserCommentDTO::fromEntity).collect(Collectors.toList())
                         : List.of()

@@ -1,0 +1,93 @@
+<div class="p-px-4 p-pt-4 article">
+  <div class="article-container">
+    <div class="grid m-0 justify-content-center">
+      <!-- Bouton Créer un article -->
+      <div class="col-12 md:col-6 lg:col-6 p-2">
+        <button
+          class="p-button p-button-primary"
+          label="Créer un article"
+          pButton
+          routerLink="/articles/create"
+        ></button>
+      </div>
+
+      <!-- Tri à droite -->
+      <div class="col-12 md:col-6 text-right p-2">
+        <div class="flex justify-content-between md:justify-content-end align-items-center gap-2">
+          <span class="font-bold">Trier par</span>
+          <p-dropdown
+            (onChange)="onSortChange()"
+            [(ngModel)]="selectedSort"
+            [options]="sortOptions"
+            [showClear]="false"
+            placeholder="Date"
+            styleClass="sort-dropdown"
+          >
+            <ng-template let-option pTemplate="selectedItem">
+              <div class="dropdown-item">
+                <i
+                  [ngClass]="{
+                'pi-sort-amount-down-alt': option?.value === 'recent',
+                'pi-sort-amount-up-alt': option?.value === 'oldest'
+              }"
+                  class="pi"
+                ></i>
+                <span class="p-ml-2">{{ option?.label }}</span>
+              </div>
+            </ng-template>
+
+            <ng-template let-option pTemplate="item">
+              <div class="dropdown-item">
+                <i
+                  [ngClass]="{
+                'pi-sort-amount-down-alt': option.value === 'recent',
+                'pi-sort-amount-up-alt': option.value === 'oldest'
+              }"
+                  class="pi"
+                ></i>
+                <span class="p-ml-2">{{ option.label }}</span>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Liste des articles -->
+    <div *ngIf="sortedArticles.length > 0; else noArticles" class="grid m-0 justify-content-center">
+      <div *ngFor="let article of sortedArticles"
+           [ngClass]="['col-12', 'md:col-6', 'lg:col-6']"
+           class="p-2">
+        <p-card styleClass="list-article-card">
+          <ng-template pTemplate="content">
+            <div class="card-body">
+              <div class="grid m-0">
+                <div class="col-12">
+                  <h3 class="article-title">
+                    <a [routerLink]="['/articles/detail', article.id]">{{ article.title }}</a>
+                  </h3>
+                </div>
+                <div class="col-12 md:col-6">
+                  <strong>Date :</strong> {{ article.createdAt | date: 'd MMM yyyy' }}
+                </div>
+                <div class="col-12 md:col-6">
+                  <strong>Auteur :</strong> {{ article.user?.username }}
+                </div>
+                <div class="col-12">
+                  <p class="article-description">
+                    {{ article.content.length > 150 ? (article.content | slice: 0:150) + '...' : article.content }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </p-card>
+      </div>
+    </div>
+
+    <ng-template #noArticles>
+      <p class="p-text-center">Aucun article disponible pour le moment</p>
+    </ng-template>
+  </div>
+</div>

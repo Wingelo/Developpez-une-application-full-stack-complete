@@ -68,8 +68,8 @@ public class AuthService {
         }
     }
 
-    public String updateUserInfo(String username, String email, String password, User user) {
-        if (username != null && !username.isEmpty()) {
+    public void updateUserInfo(String username, String email, String password, User user) {
+        if (!username.equals(user.getUsername()) && username != null && !username.isEmpty()) {
             User existingUser = userRepository.findByUsername(username);
             if (existingUser == null) {
                 user.setUsername(username);
@@ -79,7 +79,7 @@ public class AuthService {
         }
 
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-        if (email != null && !email.isEmpty() && ToolsUtils.verifyStringWithRegex(email, emailRegex)) {
+        if (!email.equals(user.getEmail()) && !email.isEmpty() && ToolsUtils.verifyStringWithRegex(email, emailRegex)) {
             User existingEmailUser = userRepository.findByEmail(email);
             if (existingEmailUser == null) {
                 user.setEmail(email);
@@ -88,18 +88,17 @@ public class AuthService {
             }
         }
 
-
-        if (password != null && !password.trim().isEmpty()) {
-            String regex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>]).{8,}$";
-            if (!ToolsUtils.verifyStringWithRegex(password, regex)) {
-                throw new IllegalArgumentException("Invalid Password");
+        if (password != null && !password.isEmpty()) {
+            if (!password.equals(user.getPassword())) {
+                String regex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*(),.?\":{}|<>]).{8,}$";
+                if (!ToolsUtils.verifyStringWithRegex(password, regex)) {
+                    throw new IllegalArgumentException("Invalid Password");
+                }
+                user.setPassword(passwordEncoder.encode(password));
             }
-            user.setPassword(passwordEncoder.encode(password));
         }
         user.setUpdatedAt(LocalDateTime.now()); // Mise à jour de la date
 
         userRepository.save(user);
-
-        return jwtUtils.generateToken(user.getEmail());
     }
 }

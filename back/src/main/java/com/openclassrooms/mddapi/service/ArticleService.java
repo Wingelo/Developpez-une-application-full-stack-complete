@@ -8,6 +8,7 @@ import com.openclassrooms.mddapi.repository.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,6 +37,7 @@ public class ArticleService implements ArticleServiceImpl {
         if (content != null) {
             article.setContent(content);
         }
+        article.setCreatedAt(LocalDateTime.now());
         article.setTheme(theme);
         article.setUser(user);
         articleRepository.save(article);

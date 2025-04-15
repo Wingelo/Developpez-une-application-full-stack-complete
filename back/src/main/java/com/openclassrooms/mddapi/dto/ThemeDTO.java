@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
 
 @Data
 @AllArgsConstructor
@@ -17,21 +17,17 @@ public class ThemeDTO {
     private String name;
     private String description;
 
-    private String createdAt;
-    private String updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public static ThemeDTO fromEntity(Theme theme) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return new ThemeDTO(
                 theme.getId(),
                 theme.getName(),
                 theme.getDescription(),
-                Optional.ofNullable(theme.getCreatedAt())
-                        .map(date -> date.format(formatter))
-                        .orElse(null),
-                Optional.ofNullable(theme.getUpdatedAt())
-                        .map(date -> date.format(formatter))
-                        .orElse(null)
+                theme.getCreatedAt(),
+                theme.getUpdatedAt()
         );
     }
 }

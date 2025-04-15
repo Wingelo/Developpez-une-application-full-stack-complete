@@ -31,12 +31,12 @@ public class ThemeController {
             description = "Permet de récuperer tout les thèmes de l'application"
     )
     @GetMapping("/themes")
-    public ResponseEntity<?> getAllRentalsInfos() {
-        List<ThemeDTO> rentalsDTOS = themeService.getAllTheme();
-        if (rentalsDTOS.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Rentals not found");
+    public ResponseEntity<?> getAllThemesInfos() {
+        List<ThemeDTO> themeDTOS = themeService.getAllTheme();
+        if (themeDTOS.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Themes not found");
         }
-        return ResponseEntity.ok(rentalsDTOS);
+        return ResponseEntity.ok(themeDTOS);
 
     }
 
@@ -64,7 +64,7 @@ public class ThemeController {
         }
 
         userService.subscriptionTheme(user, theme);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Theme added");
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping(value = "/themes/subscription/{themeId}")
@@ -78,6 +78,6 @@ public class ThemeController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Not subscribed to this theme");
         }
         userService.removeSubscriptionTheme(user, theme);
-        return ResponseEntity.ok("Subscription removed successfully!");
+        return ResponseEntity.ok().build();
     }
 }

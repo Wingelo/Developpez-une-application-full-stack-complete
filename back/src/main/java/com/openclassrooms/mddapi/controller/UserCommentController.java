@@ -57,7 +57,7 @@ public class UserCommentController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Article not found");
         }
         userCommentService.addComment(content, user, article);
-        return ResponseEntity.status(HttpStatus.OK).body("Comment added");
+        return ResponseEntity.ok().build();
     }
 }
 

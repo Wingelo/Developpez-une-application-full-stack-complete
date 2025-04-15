@@ -1,0 +1,53 @@
+<div class="me-wrapper">
+  <h2 class="text-center">Profil utilisateur</h2>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="profileForm" class="form-block">
+    <div class="p-fluid">
+      <div class="field">
+        <input formControlName="username" pInputText placeholder="Username"/>
+      </div>
+
+      <div class="field">
+        <input formControlName="email" pInputText placeholder="email@email.fr"/>
+      </div>
+
+      <div class="field">
+        <p-password
+          [feedback]="false"
+          [toggleMask]="true"
+          formControlName="password"
+          inputStyleClass="w-full"
+          placeholder="Mot de passe">
+        </p-password>
+      </div>
+
+      <div class="field button-container">
+        <button class="submit-btn" label="Sauvegarder" pButton type="submit"></button>
+      </div>
+    </div>
+  </form>
+
+  <div class="separator"></div>
+
+  <h2 class="text-center">Abonnements</h2>
+
+  <ng-container *ngIf="user?.theme?.length; else noThemes">
+    <div class="themes-container">
+      <div *ngFor="let theme of user?.theme" class="theme-card">
+        <h4 class="theme-title">{{ theme.name }}</h4>
+        <p class="theme-description">{{ theme.description }}</p>
+        <button
+          (click)="deleteTheme(theme.id)"
+          class="unsubscribe-btn">
+          Se désabonner
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #noThemes>
+    <p class="text-center">Vous n’êtes abonné à aucun thème.</p>
+  </ng-template>
+
+  <p-confirmDialog></p-confirmDialog>
+</div>

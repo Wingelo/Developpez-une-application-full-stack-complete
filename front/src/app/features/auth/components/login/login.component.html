@@ -1,0 +1,29 @@
+<p-toast></p-toast>
+<button (click)="router.navigate(['/'])" class="back-btn" icon="pi pi-arrow-left" pButton></button>
+<div class="login-wrapper">
+  <div class="mobile-logo md:hidden">
+    <img alt="MDD Logo" class="logo" src="assets/logo_p6.png"/>
+  </div>
+  <h2>Connexion</h2>
+
+  <form (ngSubmit)="submit()" [formGroup]="form" class="login-form">
+    <div class="p-field">
+      <label for="emailPseudo">Identifiant</label>
+      <input formControlName="emailPseudo" id="emailPseudo" pInputText type="text"/>
+    </div>
+
+    <div class="p-field">
+      <label for="password">Mot de passe</label>
+      <p-password
+        [feedback]="false"
+        [inputStyle]="{'width':'100%'}"
+        [style]="{'width':'100%'}"
+        [toggleMask]="true"
+        formControlName="password"
+        id="password"
+      ></p-password>
+    </div>
+
+    <button [disabled]="form.invalid" class="submit-btn" label="Se connecter" pButton type="submit"></button>
+  </form>
+</div>
