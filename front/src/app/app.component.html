@@ -1,6 +1,4 @@
 <div class="app">
-
-
   <p-menubar *ngIf="!isHome && (!isLoginPage || !isMobile)" class="navbar-mdd">
     <!-- Logo à gauche -->
     <ng-template pTemplate="start">
@@ -14,7 +12,7 @@
           <a class="menu-link" routerLink="/articles">Articles</a>
           <a class="menu-link" routerLink="/themes">Thèmes</a>
           <a (click)="logout()" class="menu-link logout">Se déconnecter</a>
-          <a class="menu-link icon" routerLink="/me">
+          <a class="menu-link icon profile-icon" routerLink="/me">
             <i class="pi pi-user"></i>
           </a>
         </div>

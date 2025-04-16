@@ -48,7 +48,7 @@ public class ThemeController {
     @PostMapping(value = "/themes/subscription/{themeId}")
     public ResponseEntity<?> addSubscriptionTheme(
             @PathVariable Integer themeId) {
-        // Récupérez l'utilisateur correspondant à l'email ou pseudo
+
         User user = toolsUtils.getUserLogin(JwtUtils.getAuthenticatedUsername());
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");

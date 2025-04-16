@@ -12,6 +12,9 @@ export class SessionService {
 
   private isLoggedSubject = new BehaviorSubject<boolean>(this.isLogged)
 
+  private sessionLoadedSubject = new BehaviorSubject<boolean>(false);
+  public sessionLoaded$ = this.sessionLoadedSubject.asObservable();
+
   public $isLogged(): Observable<boolean> {
     return this.isLoggedSubject.asObservable();
   }
@@ -20,6 +23,7 @@ export class SessionService {
     this.user = user;
     this.isLogged = true;
     this.next();
+    this.sessionLoadedSubject.next(true);
   }
 
   public logOut(): void {
@@ -27,6 +31,7 @@ export class SessionService {
     this.user = undefined;
     this.isLogged = false;
     this.next();
+    this.sessionLoadedSubject.next(true);
   }
 
   public getCurrentUser(): User | undefined {

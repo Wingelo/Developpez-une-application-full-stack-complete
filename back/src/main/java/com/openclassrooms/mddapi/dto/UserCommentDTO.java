@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Data
 @AllArgsConstructor
@@ -27,7 +26,6 @@ public class UserCommentDTO {
     private Integer articleId;
 
     public static UserCommentDTO fromEntity(Comment comment) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return new UserCommentDTO(
                 comment.getId(),
                 comment.getContent(),
@@ -39,6 +37,4 @@ public class UserCommentDTO {
 
         );
     }
-
-
 }

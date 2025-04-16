@@ -70,7 +70,6 @@ public class ArticleController {
             @RequestParam("title") String title,
             @RequestParam("content") String content) {
 
-        // Récupérez l'utilisateur correspondant à l'email
         User user = toolsUtils.getUserLogin(JwtUtils.getAuthenticatedUsername());
         if (user == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");

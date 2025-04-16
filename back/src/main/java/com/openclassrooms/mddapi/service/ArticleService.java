@@ -42,5 +42,4 @@ public class ArticleService implements ArticleServiceImpl {
         article.setUser(user);
         articleRepository.save(article);
     }
-
 }

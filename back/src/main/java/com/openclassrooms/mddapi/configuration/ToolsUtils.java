@@ -24,6 +24,4 @@ public class ToolsUtils {
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         return ToolsUtils.verifyStringWithRegex(login, emailRegex) ? userService.findByEmail(login) : userService.findByUsername(login);
     }
-
-
 }

@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Data
 @AllArgsConstructor
@@ -21,9 +20,7 @@ public class UserDetailsDTO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-
     public static UserDetailsDTO fromEntity(User user) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return new UserDetailsDTO(
                 user.getId(),
                 user.getUsername(),
@@ -32,5 +29,4 @@ public class UserDetailsDTO {
                 user.getUpdatedAt()
         );
     }
-
 }

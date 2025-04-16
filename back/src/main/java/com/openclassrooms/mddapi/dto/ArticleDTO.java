@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,11 +28,11 @@ public class ArticleDTO {
 
     // USER
     private UserDetailsDTO user;
+
     // Comment
     private List<UserCommentDTO> comments;
 
     public static ArticleDTO fromEntity(Article article) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return new ArticleDTO(
                 article.getId(),
                 article.getTitle(),

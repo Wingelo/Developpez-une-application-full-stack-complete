@@ -38,14 +38,12 @@
     <h3 class="comment-title">Commentaires</h3>
 
     <!-- Liste des commentaires -->
-    <div *ngFor="let comment of sortedComments" class="comment-line">
-      <div class="username">
-        {{ comment.author }}
+    <p-scrollPanel styleClass="comment-scroll-panel">
+      <div *ngFor="let comment of sortedComments" class="comment-line">
+        <div class="username">{{ comment.author }}</div>
+        <div class="comment-content">{{ comment.content }}</div>
       </div>
-      <div class="comment-content">
-        {{ comment.content }}
-      </div>
-    </div>
+    </p-scrollPanel>
 
     <!-- Formulaire pour écrire un commentaire -->
     <form (ngSubmit)="sendComment()" [formGroup]="commentForm" class="comment-form">

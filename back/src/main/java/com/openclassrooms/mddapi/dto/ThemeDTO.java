@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Data
 @AllArgsConstructor
@@ -21,7 +20,6 @@ public class ThemeDTO {
     private LocalDateTime updatedAt;
 
     public static ThemeDTO fromEntity(Theme theme) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return new ThemeDTO(
                 theme.getId(),
                 theme.getName(),

@@ -63,7 +63,6 @@ export class DetailComponent implements OnInit {
     window.history.back();
   }
 
-
   private loadArticle(id: string): void {
     this.articleService.detail(id).subscribe((article: Article) => {
       article.comments.forEach(comment => {

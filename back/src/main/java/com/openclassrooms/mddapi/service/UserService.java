@@ -29,6 +29,4 @@ public class UserService implements UserServiceImpl {
         user.getSubscriptions().remove(theme);
         userRepository.save(user);
     }
-
-
 }

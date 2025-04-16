@@ -24,6 +24,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from "primeng/inputtext";
 import {PasswordModule} from "primeng/password";
+import {ScrollPanelModule} from "primeng/scrollpanel";
 
 const materialModules = [
   MatButtonModule,
@@ -55,7 +56,8 @@ const primengModules = [
     ...materialModules,
     ...primengModules,
     InputTextModule,
-    PasswordModule
+    PasswordModule,
+    ScrollPanelModule
   ],
   providers: [
     {

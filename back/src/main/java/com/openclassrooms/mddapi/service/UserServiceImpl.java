@@ -12,5 +12,4 @@ public interface UserServiceImpl {
     void subscriptionTheme(User user, Theme theme);
 
     void removeSubscriptionTheme(User user, Theme theme);
-
 }
