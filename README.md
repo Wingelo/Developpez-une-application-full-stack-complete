@@ -2,13 +2,13 @@
 
 ## Back
 
-### 2.1 Maven Commands to Run the Project
+### Maven Commands to Run the Project
 1. **Compile and Build the Project:**
 ```bash
 mvn clean install
 ```
 
-### 2.2 Modify the application.properties file accordingly for the application to start (You will find numbers 1 to 2 that you need to modify)
+### Modify the application.properties file accordingly for the application to start (You will find numbers 1 to 2 that you need to modify)
 - 1# Database Configuration
 - 2# Application Configuration
 - For the secret key, you must run the command in bash (for example: GIT BASH)
