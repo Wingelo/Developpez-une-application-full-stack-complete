@@ -1,5 +1,21 @@
 # P6-Full-Stack-reseau-dev
 
+## Back
+
+### Maven Commands to Run the Project
+1. **Compile and Build the Project:**
+```bash
+mvn clean install
+```
+
+### Modify the application.properties file accordingly for the application to start (You will find numbers 1 to 2 that you need to modify)
+- 1# Database Configuration
+- 2# Application Configuration
+- For the secret key, you must run the command in bash (for example: GIT BASH)
+```bash
+openssl rand -base64 32
+```
+
 ## Front
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
