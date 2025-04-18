@@ -12,7 +12,7 @@ function pseudoOrEmailValidator(control: AbstractControl) {
   const value = control.value;
   if (!value) return null;
 
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/;
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const pseudoPattern = /^[a-zA-Z0-9_]{3,}$/;
 
   return emailPattern.test(value) || pseudoPattern.test(value)
