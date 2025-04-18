@@ -53,7 +53,7 @@ export class LoginComponent {
         this.authService.me().subscribe({
           next: (user: User) => {
             this.sessionService.logIn(user);
-            this.router.navigate(['/me']);
+            this.router.navigate(['/articles']);
           },
           error: (err: any) => {
             console.error('Erreur lors de la récupération de l\'utilisateur', err);
